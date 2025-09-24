@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Codding\\tensorflow-numbers-classificator\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{072539A5-0A3E-49F8-B96D-777F91D2D886}|tensorflow-numbers-classificator\\tensorflow-numbers-classificator.vcxproj|D:\\Codding\\tensorflow-numbers-classificator\\tensorflow-numbers-classificator\\tensorflow-numbers-classificator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{072539A5-0A3E-49F8-B96D-777F91D2D886}|tensorflow-numbers-classificator\\tensorflow-numbers-classificator.vcxproj|solutionrelative:tensorflow-numbers-classificator\\tensorflow-numbers-classificator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "tensorflow-numbers-classificator.cpp",
+              "DocumentMoniker": "D:\\Codding\\tensorflow-numbers-classificator\\tensorflow-numbers-classificator\\tensorflow-numbers-classificator.cpp",
+              "RelativeDocumentMoniker": "tensorflow-numbers-classificator\\tensorflow-numbers-classificator.cpp",
+              "ToolTip": "D:\\Codding\\tensorflow-numbers-classificator\\tensorflow-numbers-classificator\\tensorflow-numbers-classificator.cpp",
+              "RelativeToolTip": "tensorflow-numbers-classificator\\tensorflow-numbers-classificator.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-24T08:34:06.126Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
