@@ -1,2 +1,7 @@
 ﻿  tensorflow-numbers-classificator.cpp
+D:\Codding\tensorflow-numbers-classificator\tensorflow-numbers-classificator\include\tensorflow\c\c_api.h(987,38): warning C4190: для "TF_NewWhile" задано С-связывание, но возвращаемый "TF_WhileParams" несовместим с языком С
+  (компиляция исходного файла "tensorflow-numbers-classificator.cpp")
+      D:\Codding\tensorflow-numbers-classificator\tensorflow-numbers-classificator\include\tensorflow\c\c_api.h(945,16):
+       см. объявление "TF_WhileParams"
+  
   tensorflow-numbers-classificator.vcxproj -> D:\Codding\tensorflow-numbers-classificator\x64\Debug\tensorflow-numbers-classificator.exe
