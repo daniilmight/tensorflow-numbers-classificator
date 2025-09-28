@@ -64,7 +64,7 @@ model = keras.Sequential([
     # Полносвязный скрытый слой: 256 нейронов, активация ReLU
     keras.layers.Dense(256, activation="relu", name="dense1_hidden"),
 
-    # Полносвязный скрытый слой: 256 нейронов, активация ReLU
+    # Полносвязный скрытый слой: 32 нейронов, активация ReLU
     keras.layers.Dense(32, activation="relu", name="dense2_hidden"),
 
     # Выходной слой: 10 нейронов (по числу классов MNIST), softmax для вероятностей
