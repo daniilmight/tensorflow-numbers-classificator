@@ -1,4 +1,5 @@
-﻿#include <tensorflow/c/c_api.h>  // C API TensorFlow
+﻿
+#include <tensorflow/c/c_api.h>
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -12,7 +13,7 @@
 // ------------------------------------------------------------
 struct DigitProb {
     int digit;     // предсказанная цифра
-    float prob;    // вероятность (score) этой цифры
+    float prob;    // вероятность этой цифры
 };
 
 
@@ -89,12 +90,8 @@ TF_Graph* load_graph(const std::string& pb_path) {
 // Главная программа
 // ------------------------------------------------------------
 int main() {
-
     std::string python_script = "python preprocess_image.py";
-    std::string input_image = "my_digit.png";
-    std::string output_bin = "export/sample_input.bin";
-
-    std::string command = python_script + " " + input_image + " " + output_bin;  // формируем команду
+    std::string command = python_script;  // формируем команду
     int ret = std::system(command.c_str());  // запускаем Python скрипт
     if (ret != 0) {
         std::cerr << "Python preprocessing failed!" << std::endl;
@@ -106,11 +103,11 @@ int main() {
     std::string pb_path = export_dir + "/mnist_frozen_graph.pb";
     std::string sample_file = export_dir + "/sample_input.bin";
 
+    // Загрузка графа
     std::cout << "Loading graph from: " << pb_path << std::endl;
     TF_Graph* graph = load_graph(pb_path);
 
-
-    // Создание сессии для выполнения инференса
+    // Создание сессии
     TF_Status* status = TF_NewStatus();
     TF_SessionOptions* sess_opts = TF_NewSessionOptions();
     TF_Session* session = TF_NewSession(graph, sess_opts, status);
@@ -126,7 +123,7 @@ int main() {
     std::memcpy(TF_TensorData(input_tensor), input_data.data(), input_data.size() * sizeof(float));
 
     // Поиск операций по имени
-    // --- Находим вход и выход по именам из графа ---
+    // Находим вход и выход по именам из графа
     TF_Operation* input_op = TF_GraphOperationByName(graph, "x");
     TF_Operation* output_op = TF_GraphOperationByName(graph, "sequential_1/predictions_1/Softmax");
 

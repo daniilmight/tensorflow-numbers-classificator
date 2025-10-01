@@ -4,9 +4,6 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.python.framework.convert_to_constants import convert_variables_to_constants_v2
 
-# ============================================================
-# Пути и директории проекта
-# ============================================================
 # BASE_DIR - основная директория проекта, в которой будут храниться все файлы
 # EXPORT_DIR - директория для сохранения frozen graph и тестовых данных
 # CHECKPOINT_DIR - директория для сохранения чекпоинтов модели (лучшие веса)
@@ -17,9 +14,6 @@ CHECKPOINT_DIR = os.path.join(BASE_DIR, "checkpoints")
 os.makedirs(EXPORT_DIR, exist_ok=True)
 os.makedirs(CHECKPOINT_DIR, exist_ok=True)
 
-# ============================================================
-# Загрузка и предобработка данных MNIST
-# ============================================================
 # Загружаем стандартный датасет MNIST (изображения 28x28 пикселей)
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 
@@ -30,18 +24,15 @@ os.makedirs(CHECKPOINT_DIR, exist_ok=True)
 x_train = np.expand_dims(x_train, -1).astype("float32") / 255.0
 x_test = np.expand_dims(x_test, -1).astype("float32") / 255.0
 
-# Ограничиваем размер датасета для ускорения обучения
-TRAIN_LIMIT = 60000 # - количество картинок для обучения
-TEST_LIMIT = 10000 # - количество картинок для теста
+# # Ограничиваем размер датасета для ускорения обучения
+# TRAIN_LIMIT = 60000 # - количество картинок для обучения
+# TEST_LIMIT = 10000 # - количество картинок для теста
 
-x_train, y_train = x_train[:TRAIN_LIMIT], y_train[:TRAIN_LIMIT]
-x_test, y_test = x_test[:TEST_LIMIT], y_test[:TEST_LIMIT]
+# x_train, y_train = x_train[:TRAIN_LIMIT], y_train[:TRAIN_LIMIT]
+# x_test, y_test = x_test[:TEST_LIMIT], y_test[:TEST_LIMIT]
 
 print(f"Используем {len(x_train)} обучающих и {len(x_test)} тестовых изображений")
 
-# ============================================================
-# Архитектура сверточной нейросети (CNN)
-# ============================================================
 # Модель принимает вход (28x28x1) и выполняет классификацию на 10 классов
 model = keras.Sequential([
     keras.layers.Input(shape=(28, 28, 1), name="input_image"),
@@ -64,7 +55,7 @@ model = keras.Sequential([
     # Полносвязный скрытый слой: 256 нейронов, активация ReLU
     keras.layers.Dense(256, activation="relu", name="dense1_hidden"),
 
-    # Полносвязный скрытый слой: 32 нейронов, активация ReLU
+    # Полносвязный скрытый слой: 32 нейрона, активация ReLU
     keras.layers.Dense(32, activation="relu", name="dense2_hidden"),
 
     # Выходной слой: 10 нейронов (по числу классов MNIST), softmax для вероятностей
@@ -75,7 +66,7 @@ model = keras.Sequential([
 # Компиляция модели
 # ============================================================
 # optimizer - алгоритм оптимизации (Adam, скорость обучения 0.001)
-# loss - функция ошибки (sparse_categorical_crossentropy подходит для целых меток классов)
+# loss - функция ошибки (sparse_categorical_crossentropy для целых меток классов)
 # metrics - метрика качества (accuracy - доля правильных ответов)
 model.compile(
     optimizer=keras.optimizers.Adam(learning_rate=0.001),
@@ -87,7 +78,7 @@ model.compile(
 # Настройки обучения
 # ============================================================
 EPOCHS = 64       # количество эпох обучения (полных проходов по датасету)
-BATCH_SIZE = 32  # размер батча (количество изображений в одной итерации обучения)
+BATCH_SIZE = 32   # размер батча (количество изображений в одной итерации обучения)
 
 # Callbacks - вспомогательные функции для обучения
 callbacks = [
@@ -138,9 +129,6 @@ frozen_graph_def = frozen_func.graph.as_graph_def()
 tf.io.write_graph(frozen_graph_def, EXPORT_DIR, "mnist_frozen_graph.pb", as_text=False)
 print(f"Frozen graph сохранен в {os.path.join(EXPORT_DIR, 'mnist_frozen_graph.pb')}")
 
-# ============================================================
-# Сохранение тестового примера
-# ============================================================
 # Сохраняем одно изображение и метку к нему (для последующего инференса)
 sample = x_test[0:1]  # batch=1
 sample.astype("float32").tofile(os.path.join(EXPORT_DIR, "sample_input.bin"))
